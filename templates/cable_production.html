@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BARCODE</title>
+    <style>
+        .block-pdf {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .block-pdf img {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .block-up {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+<!--    <img src="logo_starline.svg" alt=" logo">-->
+    <h1 style="color: blue; font-weight: bold;"><b>StarLine</b></h1>
+    <h2 style="color: black;">Производство Победит 3</h2>
+    <h2>QR-коды (20x30) на сопроводительные листы </h2>
+<!--    <h4><a href="https://barcode.starline.ru/">Ссылка</a> для печати QR-кодов для сборок</h4>-->
+
+    <form method="POST" action="/cable_production">
+        <label for="SBOR">SAP-код:</label>
+        <input type="text" id="SBOR" name="input" required><br><br>
+
+        <select id="select" name="select" required>
+            <option value="Выбрать">Выбрать</option>
+            <option value="SBOR">SBOR</option>
+            <option value="UC">UC</option>
+            <option value="MS">MS</option>
+            <option value="WT">WT</option>
+            <option value="Z457">Z457</option>
+            <option value="Z458">Z458</option>
+            <option value="A488">A488</option>
+            <option value="CC36">CC36</option>
+        </select>
+        <input type="submit" value="Сгенерировать">
+    </form>
+
+    {% if qr_code_path %}
+    <div class="block-pdf">
+        <img src="data:image/png;base64,{{ qr_code_path }}" alt="QR Code">
+        <iframe src="/cable_production" frameborder="0" width="100%" height="600px"></iframe>
+    </div>
+{% endif %}
+
+</body>
+</html>
